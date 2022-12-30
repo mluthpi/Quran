@@ -30,7 +30,7 @@ class DetailSurahActivity : AppCompatActivity() {
         })
     }
 
-    private fun showSurahDetail(listDetailSurah: List<AyatItem>) {
+    private fun showSurahDetail(listDetailSurah: AyatItem) {
         adapter.addItems(listDetailSurah)
         binding.rvDetailActivity.apply {
             layoutManager = LinearLayoutManager(
