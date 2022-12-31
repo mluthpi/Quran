@@ -8,7 +8,7 @@ data class DetailSuratResponse(
 	val nama: String? = null,
 
 	@field:SerializedName("ayat")
-	val ayat: List<AyatItem?>? = null,
+	val ayat: List<AyatItem>? = null,
 
 	@field:SerializedName("surat_selanjutnya")
 	val suratSelanjutnya: SuratSelanjutnya? = null,
@@ -17,7 +17,7 @@ data class DetailSuratResponse(
 	val namaLatin: String? = null,
 
 	@field:SerializedName("surat_sebelumnya")
-	val suratSebelumnya: Boolean? = null,
+	val suratSebelumnya: Any? = null,
 
 	@field:SerializedName("jumlah_ayat")
 	val jumlahAyat: Int? = null,

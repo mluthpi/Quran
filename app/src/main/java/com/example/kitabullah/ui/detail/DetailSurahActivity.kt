@@ -2,6 +2,7 @@ package com.example.kitabullah.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,32 +14,35 @@ class DetailSurahActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailSurahBinding
     private lateinit var detailSurahViewModel: DetailSurahViewModel
 
-    private lateinit var adapter : DetailSurahAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSurahBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val number = intent.getIntExtra("nomor", 0)
-
+        println("TEST__ DetailSurahActivity running...")
         detailSurahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
         )[DetailSurahViewModel::class.java]
 
+        detailSurahViewModel.getDetailSurah(number)
         detailSurahViewModel.listDetailSurah.observe(this, {surahDetail ->
             showSurahDetail(surahDetail)
+            println("TEST__ detailSurahViewModel running...")
+            Log.d("TEST_DATA", "onCreate: $surahDetail")
         })
     }
 
-    private fun showSurahDetail(listDetailSurah: AyatItem) {
-        adapter.addItems(listDetailSurah)
+    private fun showSurahDetail(listDetailSurah: List<AyatItem>) {
+        val detailAdapter = DetailSurahAdapter()
+        detailAdapter.addItems(listDetailSurah)
+
         binding.rvDetailActivity.apply {
             layoutManager = LinearLayoutManager(
                 this@DetailSurahActivity,
                 RecyclerView.VERTICAL,
                 false
             )
-            adapter = adapter
+            adapter = detailAdapter
         }
 
     }
