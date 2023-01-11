@@ -1,4 +1,4 @@
-package com.example.kitabullah.ui.detail
+package com.example.kitabullah.ui.detail.surah
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,9 +13,9 @@ class DetailSurahAdapter() : RecyclerView.Adapter<DetailSurahAdapter.DetailSurah
 
     private val detailSurahList = mutableListOf<AyatItem>()
 
-    fun addItems(detailSurahList: AyatItem) {
+    fun addItems(detailSurahList: List<AyatItem>) {
         this.detailSurahList.clear()
-        this.detailSurahList.addAll(listOf(detailSurahList))
+        this.detailSurahList.addAll(detailSurahList)
         notifyDataSetChanged()
     }
 

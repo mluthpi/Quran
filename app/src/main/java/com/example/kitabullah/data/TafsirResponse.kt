@@ -17,7 +17,7 @@ data class TafsirResponse(
 	val suratSebelumnya: SuratSebelumnya? = null,
 
 	@field:SerializedName("tafsir")
-	val tafsir: List<TafsirItem?>? = null,
+	val tafsir: List<TafsirItem>? = null,
 
 	@field:SerializedName("jumlah_ayat")
 	val jumlahAyat: Int? = null,

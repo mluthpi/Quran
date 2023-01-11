@@ -1,4 +1,4 @@
-package com.example.kitabullah.ui.detail
+package com.example.kitabullah.ui.detail.surah
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -11,7 +11,6 @@ import com.example.kitabullah.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class DetailSurahViewModel : ViewModel() {
 
 
@@ -29,9 +28,12 @@ class DetailSurahViewModel : ViewModel() {
                 call: Call<DetailSuratResponse>,
                 response: Response<DetailSuratResponse>
             ) {
+                println("TEST__ getDetailSurah running...")
+
                 _isLoading.value = false
                 if(response.isSuccessful) {
-                    _listDetailSurah.value = response.body().ayat
+                    _listDetailSurah.value = response.body()?.ayat ?: emptyList()
+                    println("TEST__ _listDetailSurah.value running...")
                 } else {
                     Log.e(TAG, "onResponse: ${response.message()} ")
                 }

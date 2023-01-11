@@ -5,14 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ui.detail.surah.DetailSurahActivity">
+    tools:context=".ui.detail.tafsir.DetailTafsirActivity">
+
+    <TextView
+        android:id="@+id/tv_detail_nama_latin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NAMA LATIN"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/teal_700"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_detail_activity"
+        android:id="@+id/rv_tafsir_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        tools:listitem="@layout/list_detail_ayat"/>
+        tools:listitem="@layout/list_detail_tafsir"/>
 
 </LinearLayout>

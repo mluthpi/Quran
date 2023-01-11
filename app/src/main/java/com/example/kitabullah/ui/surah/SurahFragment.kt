@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentSurahBinding
-import com.example.kitabullah.ui.detail.DetailSurahActivity
-import kotlin.math.log
+import com.example.kitabullah.ui.detail.surah.DetailSurahActivity
 
 class SurahFragment : Fragment() {
 
