@@ -2,6 +2,7 @@ package com.example.kitabullah.ui.detail.tafsir
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,10 +29,15 @@ class DetailTafsirActivity : AppCompatActivity() {
 
         detailTafsirViewModel.getDetailTafsir(number)
         detailTafsirViewModel.listDetailTafsir.observe(this, {tafsirDetail ->
+            Log.d("TAG", "onCreate: $tafsirDetail")
             showTafsirDetail(tafsirDetail)
         })
+        detailTafsirViewModel.dataDetail.observe(this, {dataDetail ->
+            showLatin(dataDetail)
+        })
 
-        showLatin(TafsirResponse())
+
+
     }
 
 
@@ -44,11 +50,18 @@ class DetailTafsirActivity : AppCompatActivity() {
                 this@DetailTafsirActivity,
                 RecyclerView.VERTICAL, false
             )
-            adapter = DetailTafsirAdapter()
+            adapter = detailTafsirAdapter
         }
     }
 
     private fun showLatin(namaLatin: TafsirResponse) {
-        binding.tvDetailNamaLatin.text = namaLatin.namaLatin
+        binding.tvDetailNamaLatin.text = namaLatin.nama
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = namaLatin.namaLatin
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

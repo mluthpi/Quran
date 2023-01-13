@@ -23,7 +23,7 @@ class TafsirFragment : Fragment() {
 
     private val tafsirAdapter = SurahAdapter {
         val intent = Intent(this@TafsirFragment.requireContext(), DetailTafsirActivity::class.java)
-        intent.putExtra("nomot",it.nomor)
+        intent.putExtra("nomor",it.nomor)
         startActivity(intent)
     }
 

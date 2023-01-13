@@ -18,6 +18,9 @@ class DetailTafsirViewModel: ViewModel() {
     private val _listDetailTafsir = MutableLiveData<List<TafsirItem>>()
     val listDetailTafsir: LiveData<List<TafsirItem>> = _listDetailTafsir
 
+    private val _dataDetail = MutableLiveData<TafsirResponse>()
+    val dataDetail : LiveData<TafsirResponse> = _dataDetail
+
     fun getDetailTafsir(nomor : Int) {
         val client = ApiConfig.getApiRest().getTafsir(nomor = nomor)
         client.enqueue(object : Callback<TafsirResponse> {
@@ -27,6 +30,7 @@ class DetailTafsirViewModel: ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _listDetailTafsir.value = response.body()?.tafsir?: emptyList()
+                    _dataDetail.value = response.body()
                 } else {
                     Log.e("TEST", "onResponse: onResponse:${response.message()} ")
                 }

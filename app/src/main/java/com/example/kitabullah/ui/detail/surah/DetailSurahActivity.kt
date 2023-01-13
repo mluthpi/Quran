@@ -31,6 +31,8 @@ class DetailSurahActivity : AppCompatActivity() {
             Log.d("TEST_DATA", "onCreate: $surahDetail")
         })
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "test"
 
 
     }
@@ -47,6 +49,10 @@ class DetailSurahActivity : AppCompatActivity() {
             adapter = detailAdapter
         }
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }

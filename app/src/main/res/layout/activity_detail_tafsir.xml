@@ -11,15 +11,15 @@
         android:id="@+id/tv_detail_nama_latin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NAMA LATIN"
+        tools:text="NAMA LATIN"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textColor="@color/teal_700"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tafsir_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         tools:listitem="@layout/list_detail_tafsir"/>
 
