@@ -15,18 +15,18 @@ import retrofit2.Response
 class DetailTafsirViewModel: ViewModel() {
 
 
-    private val _detailTafsir = MutableLiveData<List<TafsirItem>>()
-    val detailTafsir: LiveData<List<TafsirItem>> = _detailTafsir
+    private val _listDetailTafsir = MutableLiveData<List<TafsirItem>>()
+    val listDetailTafsir: LiveData<List<TafsirItem>> = _listDetailTafsir
 
-    fun getDetailTafsir() {
-        val client = ApiConfig.getApiRest().getTafsir()
+    fun getDetailTafsir(nomor : Int) {
+        val client = ApiConfig.getApiRest().getTafsir(nomor = nomor)
         client.enqueue(object : Callback<TafsirResponse> {
             override fun onResponse(
                 call: Call<TafsirResponse>,
                 response: Response<TafsirResponse>
             ) {
                 if (response.isSuccessful) {
-                    _detailTafsir.value = response.body()?.tafsir?: emptyList()
+                    _listDetailTafsir.value = response.body()?.tafsir?: emptyList()
                 } else {
                     Log.e("TEST", "onResponse: onResponse:${response.message()} ")
                 }

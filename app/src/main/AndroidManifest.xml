@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Kitabullah"
         tools:targetApi="31">
         <activity
-            android:name=".DetailTafsirActivity"
+            android:name=".ui.detail.tafsir.DetailTafsirActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detail.surah.DetailSurahActivity"

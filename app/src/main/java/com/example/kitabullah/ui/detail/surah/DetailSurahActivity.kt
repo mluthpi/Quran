@@ -2,16 +2,18 @@ package com.example.kitabullah.ui.detail.surah
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.data.AyatItem
 import com.example.kitabullah.databinding.ActivityDetailSurahBinding
 
+
+
 class DetailSurahActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailSurahBinding
     private lateinit var detailSurahViewModel: DetailSurahViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +25,13 @@ class DetailSurahActivity : AppCompatActivity() {
         )[DetailSurahViewModel::class.java]
 
         detailSurahViewModel.getDetailSurah(number)
-
         detailSurahViewModel.listDetailSurah.observe(this, {surahDetail ->
             showSurahDetail(surahDetail)
+            println("TEST__ detailSurahViewModel running...")
+            Log.d("TEST_DATA", "onCreate: $surahDetail")
         })
 
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
