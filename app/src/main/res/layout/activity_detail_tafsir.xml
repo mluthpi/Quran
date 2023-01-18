@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.detail.tafsir.DetailTafsirActivity">
 
     <TextView
@@ -13,6 +11,7 @@
         android:layout_height="wrap_content"
         tools:text="NAMA LATIN"
         android:gravity="center"
+        android:layout_alignParentTop="true"
         android:textSize="30sp"
         android:textColor="@color/teal_700"/>
 
@@ -20,7 +19,16 @@
         android:id="@+id/rv_tafsir_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_detail_nama_latin"
         android:layout_margin="5dp"
         tools:listitem="@layout/list_detail_tafsir"/>
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_baseline_favorite_border_24"/>
+
+</RelativeLayout>

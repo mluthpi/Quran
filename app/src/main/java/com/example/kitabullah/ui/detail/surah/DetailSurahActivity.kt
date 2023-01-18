@@ -3,12 +3,17 @@ package com.example.kitabullah.ui.detail.surah
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kitabullah.R
 import com.example.kitabullah.data.AyatItem
+import com.example.kitabullah.data.DetailSuratResponse
+import com.example.kitabullah.data.SuratResponseItem
+import com.example.kitabullah.data.TafsirResponse
 import com.example.kitabullah.databinding.ActivityDetailSurahBinding
-
+import com.example.kitabullah.model.QuranEntity
 
 
 class DetailSurahActivity : AppCompatActivity() {
@@ -31,6 +36,10 @@ class DetailSurahActivity : AppCompatActivity() {
             Log.d("TEST_DATA", "onCreate: $surahDetail")
         })
 
+        detailSurahViewModel.dataDetail.observe(this, {dataDetail ->
+            showLatin(dataDetail)
+        })
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "test"
 
@@ -49,7 +58,50 @@ class DetailSurahActivity : AppCompatActivity() {
             adapter = detailAdapter
         }
 
+
     }
+
+    private fun showLatin(namaLatin: DetailSuratResponse) {
+        binding.tvDetailNamaLatin.text = namaLatin.nama
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = namaLatin.nama
+
+        detailSurahViewModel.getFavoriteSurah().observe(this,{favSurah ->
+            val isFavorite = favSurah.filter { it.nomor == namaLatin.nomor }.isNotEmpty()
+            setupFavoriteSurah(isFavorite, namaLatin)
+        })
+    }
+
+    private fun setupFavoriteSurah(isFavorite: Boolean, surah : DetailSuratResponse ) {
+        if (isFavorite) {
+            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+
+            binding.fbFavorite.setOnClickListener {
+                val title = QuranEntity(
+                    nomor = surah.nomor,
+                    nama = surah.nama,
+                    namaLatin = surah.namaLatin,
+                    arti = surah.arti
+                )
+                detailSurahViewModel.deleteFromDB(title)
+                Toast.makeText(this, "Berhasil dihapus dari favorite", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorited_24)
+
+            binding.fbFavorite.setOnClickListener {
+                val title = QuranEntity(
+                    nomor = surah.nomor,
+                    nama = surah.nama,
+                    namaLatin = surah.namaLatin,
+                    arti = surah.arti
+                )
+                detailSurahViewModel.insertToDB(title)
+                Toast.makeText(this, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

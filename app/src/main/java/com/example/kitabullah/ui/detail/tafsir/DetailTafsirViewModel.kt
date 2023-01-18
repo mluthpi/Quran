@@ -1,5 +1,6 @@
 package com.example.kitabullah.ui.detail.tafsir
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,12 +8,15 @@ import androidx.lifecycle.ViewModel
 import com.example.kitabullah.data.AyatItem
 import com.example.kitabullah.data.TafsirItem
 import com.example.kitabullah.data.TafsirResponse
+import com.example.kitabullah.model.QuranEntity
 import com.example.kitabullah.network.ApiConfig
+import com.example.kitabullah.repository.QuranRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailTafsirViewModel: ViewModel() {
+class DetailTafsirViewModel(application: Application): ViewModel() {
+    private val mTafsirRepository : QuranRepository = QuranRepository(application)
 
 
     private val _listDetailTafsir = MutableLiveData<List<TafsirItem>>()
@@ -41,5 +45,15 @@ class DetailTafsirViewModel: ViewModel() {
             }
         })
     }
+
+    fun insertToDB(tafsir : QuranEntity) {
+        mTafsirRepository.insert(tafsir)
+    }
+
+    fun deleteFromDB(tafsir : QuranEntity) {
+        mTafsirRepository.delete(tafsir)
+    }
+
+    fun getFavoriteTafsir() : LiveData<List<QuranEntity>> = mTafsirRepository.getAllQuran()
 
 }
