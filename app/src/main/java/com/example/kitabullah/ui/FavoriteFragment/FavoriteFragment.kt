@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentFavoriteBinding
 import com.example.kitabullah.ui.FavoriteFragment.tabLayout.tabSurah.TabSurahFragment
 import com.example.kitabullah.ui.FavoriteFragment.tabLayout.tabTafsir.TabTafsirFragment
+import com.example.kitabullah.ui.detail.surah.DetailSurahViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -53,8 +56,8 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()
         )[FavoriteViewModel::class.java]
 
-
     }
+
 
     private fun setupTabLayout(title : String) {
         val sectionPagerAdapter = SectionPagerAdapter(requireActivity() as AppCompatActivity, title)
