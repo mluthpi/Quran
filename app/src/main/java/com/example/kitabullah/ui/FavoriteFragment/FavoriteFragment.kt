@@ -48,6 +48,8 @@ class FavoriteFragment : Fragment() {
 
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,6 +58,7 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()
         )[FavoriteViewModel::class.java]
 
+        setupTabLayout("title")
     }
 
 

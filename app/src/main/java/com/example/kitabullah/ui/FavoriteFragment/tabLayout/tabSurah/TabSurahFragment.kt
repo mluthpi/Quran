@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentTabSurahBinding
+import com.example.kitabullah.model.QuranEntity
+import com.example.kitabullah.ui.FavoriteFragment.FavoriteAdapter
+import com.example.kitabullah.ui.FavoriteFragment.FavoriteViewModel
 import com.example.kitabullah.ui.detail.surah.DetailSurahActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
 import com.example.kitabullah.ui.surah.SurahViewModel
@@ -29,9 +32,9 @@ class TabSurahFragment : Fragment() {
     private var _binding: FragmentTabSurahBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var surahViewModel: SurahViewModel
+    private lateinit var surahViewModel: FavoriteViewModel
 
-    private val surahAdapter = SurahAdapter {
+    private val surahAdapter = FavoriteAdapter {
         val intent = Intent(this@TabSurahFragment.requireContext(), DetailSurahActivity::class.java)
         intent.putExtra("nomor", it.nomor)
         startActivity(intent)
@@ -51,20 +54,17 @@ class TabSurahFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[SurahViewModel::class.java]
+        )[FavoriteViewModel::class.java]
 
-        surahViewModel.getSurah()
+        surahViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
+            showSurah(it)
+        })
+        //buat file adapter dgn quranentiti
+        //copy dari surahadapter
 
-        surahViewModel.listSurah.observe(requireActivity()) {surah ->
-            showSurah(surah)
-        }
-
-        surahViewModel.isLoading.observe(requireActivity()) {isLoading ->
-            showLoading(isLoading)
-        }
     }
 
-    private fun showSurah(listSurah: List<SuratResponseItem>) {
+    private fun showSurah(listSurah: List<QuranEntity>) {
         surahAdapter.addItems(listSurah)
         binding.rvSurah.apply {
             layoutManager = LinearLayoutManager(

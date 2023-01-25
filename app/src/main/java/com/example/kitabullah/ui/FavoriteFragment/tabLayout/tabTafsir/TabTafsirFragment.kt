@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentTabTafsirBinding
+import com.example.kitabullah.model.QuranEntity
+import com.example.kitabullah.ui.FavoriteFragment.FavoriteAdapter
+import com.example.kitabullah.ui.FavoriteFragment.FavoriteViewModel
 import com.example.kitabullah.ui.detail.tafsir.DetailTafsirActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
 import com.example.kitabullah.ui.tafsir.TafsirViewModel
@@ -28,9 +31,10 @@ private const val ARG_PARAM2 = "param2"
 class TabTafsirFragment : Fragment() {
     private var _binding: FragmentTabTafsirBinding? = null
     private val binding get() = _binding!!
-    private lateinit var tafsirViewModel: TafsirViewModel
 
-    private val tafsirAdapter = SurahAdapter {
+    private lateinit var tafsirViewModel: FavoriteViewModel
+
+    private val tafsirAdapter = FavoriteAdapter {
         val intent = Intent(this@TabTafsirFragment.requireContext(), DetailTafsirActivity::class.java)
         intent.putExtra("nomor", it.nomor)
         startActivity(intent)
@@ -49,20 +53,17 @@ class TabTafsirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[TafsirViewModel::class.java]
+        )[FavoriteViewModel::class.java]
 
-        tafsirViewModel.getTafsir()
+        tafsirViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
+            showTafsir(it)
+        })
 
-        tafsirViewModel.listTafsir.observe(requireActivity()) { tafsir ->
-            showTafsir(tafsir)
-        }
 
-        tafsirViewModel.isLoading.observe(requireActivity()) {isLoading ->
-            showLoading(isLoading )
-        }
+
     }
 
-    private fun showTafsir(listTafsir: List<SuratResponseItem>) {
+    private fun showTafsir(listTafsir: List<QuranEntity>) {
         tafsirAdapter.addItems(listTafsir)
         binding.rvTafsir.apply {
             layoutManager = LinearLayoutManager(
