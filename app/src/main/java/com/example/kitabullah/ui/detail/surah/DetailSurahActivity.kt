@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.R
+import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.AyatItem
 import com.example.kitabullah.data.DetailSuratResponse
 import com.example.kitabullah.data.SuratResponseItem
@@ -17,8 +19,12 @@ import com.example.kitabullah.model.QuranEntity
 
 
 class DetailSurahActivity : AppCompatActivity() {
+
     private lateinit var binding : ActivityDetailSurahBinding
-    private lateinit var detailSurahViewModel: DetailSurahViewModel
+
+    private val detailSurahViewModel: DetailSurahViewModel by viewModels {
+        ViewModelFactory(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +32,6 @@ class DetailSurahActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val number = intent.getIntExtra("nomor", 0)
-        detailSurahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[DetailSurahViewModel::class.java]
 
         detailSurahViewModel.getDetailSurah(number)
         detailSurahViewModel.listDetailSurah.observe(this, {surahDetail ->

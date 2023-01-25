@@ -15,16 +15,7 @@ import com.example.kitabullah.ui.detail.surah.DetailSurahActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
 import com.example.kitabullah.ui.surah.SurahViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TabSurahFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TabSurahFragment : Fragment() {
     private var _binding: FragmentTabSurahBinding? = null
     private val binding get() = _binding!!
@@ -36,8 +27,6 @@ class TabSurahFragment : Fragment() {
         intent.putExtra("nomor", it.nomor)
         startActivity(intent)
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +44,6 @@ class TabSurahFragment : Fragment() {
 
         surahViewModel.getSurah()
 
-        surahViewModel.listSurah.observe(requireActivity()) {surah ->
-            showSurah(surah)
-        }
-
-        surahViewModel.isLoading.observe(requireActivity()) {isLoading ->
-            showLoading(isLoading)
-        }
     }
 
     private fun showSurah(listSurah: List<SuratResponseItem>) {
