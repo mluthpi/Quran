@@ -9,7 +9,7 @@ import com.example.kitabullah.ui.detail.tafsir.DetailTafsirViewModel
 import com.example.kitabullah.ui.surah.SurahViewModel
 import java.lang.IllegalArgumentException
 
-class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
         private var INSTANCE : ViewModelFactory? = null

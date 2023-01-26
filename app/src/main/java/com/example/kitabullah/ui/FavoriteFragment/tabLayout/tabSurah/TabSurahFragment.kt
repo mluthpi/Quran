@@ -1,14 +1,17 @@
 package com.example.kitabullah.ui.FavoriteFragment.tabLayout.tabSurah
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentTabSurahBinding
 import com.example.kitabullah.model.QuranEntity
@@ -18,29 +21,20 @@ import com.example.kitabullah.ui.detail.surah.DetailSurahActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
 import com.example.kitabullah.ui.surah.SurahViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TabSurahFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TabSurahFragment : Fragment() {
     private var _binding: FragmentTabSurahBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var surahViewModel: FavoriteViewModel
+    private val surahViewModel: FavoriteViewModel by viewModels {
+        ViewModelFactory(mApplication = Application())
+    }
 
     private val surahAdapter = FavoriteAdapter {
         val intent = Intent(this@TabSurahFragment.requireContext(), DetailSurahActivity::class.java)
         intent.putExtra("nomor", it.nomor)
         startActivity(intent)
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +47,8 @@ class TabSurahFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[FavoriteViewModel::class.java]
+//        surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
+//        )[FavoriteViewModel::class.java]
 
         surahViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
             showSurah(it)

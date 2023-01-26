@@ -36,13 +36,10 @@ class DetailSurahViewModel(application: Application) : ViewModel() {
                 call: Call<DetailSuratResponse>,
                 response: Response<DetailSuratResponse>
             ) {
-                println("TEST__ getDetailSurah running...")
-
                 _isLoading.value = false
                 if(response.isSuccessful) {
                     _listDetailSurah.value = response.body()?.ayat ?: emptyList()
                     _dataDetail.value = response.body()
-                    println("TEST__ _listDetailSurah.value running...")
                 } else {
                     Log.e(TAG, "onResponse: ${response.message()} ")
                 }

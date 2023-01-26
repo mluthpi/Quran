@@ -3,10 +3,12 @@ package com.example.kitabullah.ui.FavoriteFragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.kitabullah.databinding.ListSurahBinding
 import com.example.kitabullah.model.QuranEntity
 
 class FavoriteAdapter (val onItemClick: (surahItem: QuranEntity)-> Unit): RecyclerView.Adapter<FavoriteAdapter.SurahHolder>() {
+
 
     private val surahList = mutableListOf<QuranEntity>()
 
@@ -42,4 +44,7 @@ class FavoriteAdapter (val onItemClick: (surahItem: QuranEntity)-> Unit): Recycl
 
     override fun getItemCount(): Int = surahList.size
 
+
 }
+
+

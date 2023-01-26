@@ -1,14 +1,17 @@
 package com.example.kitabullah.ui.FavoriteFragment.tabLayout.tabTafsir
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentTabTafsirBinding
 import com.example.kitabullah.model.QuranEntity
@@ -32,7 +35,9 @@ class TabTafsirFragment : Fragment() {
     private var _binding: FragmentTabTafsirBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var tafsirViewModel: FavoriteViewModel
+    private val tafsirViewModel: FavoriteViewModel by viewModels {
+        ViewModelFactory(mApplication = Application())
+    }
 
     private val tafsirAdapter = FavoriteAdapter {
         val intent = Intent(this@TabTafsirFragment.requireContext(), DetailTafsirActivity::class.java)
@@ -52,8 +57,8 @@ class TabTafsirFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[FavoriteViewModel::class.java]
+//        tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
+//        )[FavoriteViewModel::class.java]
 
         tafsirViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
             showTafsir(it)

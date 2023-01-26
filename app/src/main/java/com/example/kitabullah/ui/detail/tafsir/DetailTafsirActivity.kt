@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitabullah.R
+import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.TafsirItem
 import com.example.kitabullah.data.TafsirResponse
 import com.example.kitabullah.databinding.ActivityDetailTafsirBinding
@@ -18,9 +20,9 @@ import com.example.kitabullah.ui.FavoriteFragment.FavoriteFragment
 class DetailTafsirActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailTafsirBinding
-    private lateinit var detailTafsirViewModel: DetailTafsirViewModel
-
-
+    private val detailTafsirViewModel: DetailTafsirViewModel by viewModels {
+        ViewModelFactory(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +30,6 @@ class DetailTafsirActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val number = intent.getIntExtra("nomor", 0)
-
-
-
-        detailTafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-        )[DetailTafsirViewModel::class.java]
-
 
         detailTafsirViewModel.getDetailTafsir(number)
         detailTafsirViewModel.listDetailTafsir.observe(this, {tafsirDetail ->
@@ -44,13 +40,7 @@ class DetailTafsirActivity : AppCompatActivity() {
             showLatin(dataDetail)
         })
 
-
-
     }
-
-
-
-
 
     private fun showTafsirDetail(listTafsirItem: List<TafsirItem>) {
         val detailTafsirAdapter = DetailTafsirAdapter()
@@ -77,7 +67,7 @@ class DetailTafsirActivity : AppCompatActivity() {
 
     private fun setupFavoriteTafsir(isFavorite: Boolean, surah: TafsirResponse) {
         if (isFavorite) {
-            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorited_24)
 
             binding.fbFavorite.setOnClickListener {
                 val title = QuranEntity(
@@ -90,7 +80,7 @@ class DetailTafsirActivity : AppCompatActivity() {
                 Toast.makeText(this, "Berhasil dihapus dari favorite", Toast.LENGTH_SHORT).show()
             }
         } else {
-            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorited_24)
+            binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
 
             binding.fbFavorite.setOnClickListener {
                 val title = QuranEntity (

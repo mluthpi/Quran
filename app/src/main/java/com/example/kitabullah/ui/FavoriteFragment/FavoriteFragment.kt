@@ -43,8 +43,8 @@ class FavoriteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val favoriteViewModel =
-            ViewModelProvider(this).get(FavoriteViewModel::class.java)
+//        val favoriteViewModel =
+//            ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,10 +55,11 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoriteViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()
-        )[FavoriteViewModel::class.java]
+//        favoriteViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()
+//        )[FavoriteViewModel::class.java]
 
-        setupTabLayout("title")
+
+        setupTabLayout("test title")
     }
 
 
