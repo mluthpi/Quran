@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kitabullah.model.QuranEntity
+import com.example.kitabullah.model.TafsirEntity
 
 
-@Database(entities = [QuranEntity::class], version = 3)
+@Database(entities = [QuranEntity::class, TafsirEntity::class], version = 4)
 abstract class QuranRoomDatabase : RoomDatabase() {
 
     abstract fun quranDao() : QuranDao

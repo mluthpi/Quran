@@ -15,7 +15,9 @@ import com.example.kitabullah.ViewModelFactory
 import com.example.kitabullah.data.SuratResponseItem
 import com.example.kitabullah.databinding.FragmentTabTafsirBinding
 import com.example.kitabullah.model.QuranEntity
+import com.example.kitabullah.model.TafsirEntity
 import com.example.kitabullah.ui.FavoriteFragment.FavoriteAdapter
+import com.example.kitabullah.ui.FavoriteFragment.FavoriteTafsirAdapter
 import com.example.kitabullah.ui.FavoriteFragment.FavoriteViewModel
 import com.example.kitabullah.ui.detail.tafsir.DetailTafsirActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
@@ -36,10 +38,10 @@ class TabTafsirFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val tafsirViewModel: FavoriteViewModel by viewModels {
-        ViewModelFactory(mApplication = Application())
+        ViewModelFactory(mApplication = requireActivity().application)
     }
 
-    private val tafsirAdapter = FavoriteAdapter {
+    private val tafsirAdapter = FavoriteTafsirAdapter {
         val intent = Intent(this@TabTafsirFragment.requireContext(), DetailTafsirActivity::class.java)
         intent.putExtra("nomor", it.nomor)
         startActivity(intent)
@@ -57,10 +59,9 @@ class TabTafsirFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-//        )[FavoriteViewModel::class.java]
 
-        tafsirViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
+
+        tafsirViewModel.getFavoriteTafsir().observe(viewLifecycleOwner, {
             showTafsir(it)
         })
 
@@ -68,7 +69,7 @@ class TabTafsirFragment : Fragment() {
 
     }
 
-    private fun showTafsir(listTafsir: List<QuranEntity>) {
+    private fun showTafsir(listTafsir: List<TafsirEntity>) {
         tafsirAdapter.addItems(listTafsir)
         binding.rvTafsir.apply {
             layoutManager = LinearLayoutManager(

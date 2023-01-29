@@ -15,6 +15,7 @@ import com.example.kitabullah.data.TafsirItem
 import com.example.kitabullah.data.TafsirResponse
 import com.example.kitabullah.databinding.ActivityDetailTafsirBinding
 import com.example.kitabullah.model.QuranEntity
+import com.example.kitabullah.model.TafsirEntity
 import com.example.kitabullah.ui.FavoriteFragment.FavoriteFragment
 
 class DetailTafsirActivity : AppCompatActivity() {
@@ -70,7 +71,7 @@ class DetailTafsirActivity : AppCompatActivity() {
             binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorited_24)
 
             binding.fbFavorite.setOnClickListener {
-                val title = QuranEntity(
+                val title = TafsirEntity(
                     nomor = surah.nomor,
                     nama = surah.nama,
                     namaLatin = surah.namaLatin,
@@ -83,7 +84,7 @@ class DetailTafsirActivity : AppCompatActivity() {
             binding.fbFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
 
             binding.fbFavorite.setOnClickListener {
-                val title = QuranEntity (
+                val title = TafsirEntity (
                     nomor = surah.nomor,
                     nama = surah.nama,
                     namaLatin = surah.namaLatin,

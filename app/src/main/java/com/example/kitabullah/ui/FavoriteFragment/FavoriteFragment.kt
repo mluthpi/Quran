@@ -55,12 +55,16 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        favoriteViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()
-//        )[FavoriteViewModel::class.java]
+
 
 
         setupTabLayout("test title")
+
     }
+
+
+
+
 
 
     private fun setupTabLayout(title : String) {
@@ -73,6 +77,7 @@ class FavoriteFragment : Fragment() {
         }.attach()
 
     }
+
 
 
     override fun onDestroyView() {

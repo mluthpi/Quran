@@ -27,7 +27,7 @@ class TabSurahFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val surahViewModel: FavoriteViewModel by viewModels {
-        ViewModelFactory(mApplication = Application())
+        ViewModelFactory(mApplication = requireActivity().application)
     }
 
     private val surahAdapter = FavoriteAdapter {
