@@ -76,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Hijaiyah"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@color/teal_700"
                     android:textStyle="bold"
                     android:textSize="18dp"/>

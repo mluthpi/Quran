@@ -47,14 +47,14 @@ class TabSurahFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
-//        )[FavoriteViewModel::class.java]
 
-        surahViewModel.getFavoriteQuran().observe(viewLifecycleOwner, {
-            showSurah(it)
+        surahViewModel.getFavoriteQuran().observe(viewLifecycleOwner, { surahList ->
+            if (surahList.isEmpty()) {
+                binding.tvEmptyFavorite.visibility = View.VISIBLE
+            } else {
+                showSurah(surahList)
+            }
         })
-        //buat file adapter dgn quranentiti
-        //copy dari surahadapter
 
     }
 

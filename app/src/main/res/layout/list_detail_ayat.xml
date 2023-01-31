@@ -50,6 +50,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_margin="5dp"
                 android:text="hijaiyah"
+                android:padding="8dp"
                 android:textColor="@color/black"
                 android:textIsSelectable="true"
                 android:textSize="20sp"
@@ -59,12 +60,17 @@
                 android:id="@+id/tv_latin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="latin"
                 android:layout_below="@id/tv_detail_hijaiyah"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="8dp"
+                android:justificationMode="inter_word"
+                android:text="latin"
+                android:textColor="@color/teal_700"
                 android:textSize="12sp"
-                android:textStyle="italic"
-                android:textColor="@color/teal_700"/>
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/tv_terjemahan"
@@ -72,6 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_latin"
                 android:layout_margin="5dp"
+                android:padding="8dp"
+                android:justificationMode="inter_word"
                 android:text="terjemahan"
                 android:textSize="12sp"
                 android:textStyle="italic" />

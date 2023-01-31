@@ -7,7 +7,7 @@ import com.example.kitabullah.databinding.ListSurahBinding
 import com.example.kitabullah.model.QuranEntity
 import com.example.kitabullah.model.TafsirEntity
 
-class FavoriteTafsirAdapter  (val onItemClick: (surahItem: TafsirEntity)-> Unit): RecyclerView.Adapter<FavoriteTafsirAdapter.SurahHolder>() {
+class FavoriteTafsirAdapter (val onItemClick: (surahItem: TafsirEntity)-> Unit): RecyclerView.Adapter<FavoriteTafsirAdapter.SurahHolder>() {
 
 
     private val surahList = mutableListOf<TafsirEntity>()

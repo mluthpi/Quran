@@ -23,16 +23,6 @@ import com.example.kitabullah.ui.detail.tafsir.DetailTafsirActivity
 import com.example.kitabullah.ui.surah.SurahAdapter
 import com.example.kitabullah.ui.tafsir.TafsirViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TabTafsirFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TabTafsirFragment : Fragment() {
     private var _binding: FragmentTabTafsirBinding? = null
     private val binding get() = _binding!!
@@ -61,8 +51,12 @@ class TabTafsirFragment : Fragment() {
 
 
 
-        tafsirViewModel.getFavoriteTafsir().observe(viewLifecycleOwner, {
-            showTafsir(it)
+        tafsirViewModel.getFavoriteTafsir().observe(viewLifecycleOwner, { tafsirList ->
+            if (tafsirList.isEmpty()) {
+                binding.tvEmptyFavorite.visibility = View.VISIBLE
+            } else {
+                showTafsir(tafsirList)
+            }
         })
 
 
