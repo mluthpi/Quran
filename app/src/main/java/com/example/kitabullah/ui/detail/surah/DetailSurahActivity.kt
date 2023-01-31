@@ -44,9 +44,6 @@ class DetailSurahActivity : AppCompatActivity() {
             showLatin(dataDetail)
         })
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "test"
-
 
     }
 
@@ -68,7 +65,7 @@ class DetailSurahActivity : AppCompatActivity() {
     private fun showLatin(namaLatin: DetailSuratResponse) {
         binding.tvDetailNamaLatin.text = namaLatin.nama
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = namaLatin.nama
+        supportActionBar?.title = namaLatin.namaLatin
 
         detailSurahViewModel.getFavoriteSurah().observe(this,{favSurah ->
             val isFavorite = favSurah.filter { it.nomor == namaLatin.nomor }.isNotEmpty()

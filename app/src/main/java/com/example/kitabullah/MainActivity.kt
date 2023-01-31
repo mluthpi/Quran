@@ -46,8 +46,6 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: MainActivity
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,6 +54,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.bttmNavigation.setOnNavigationItemSelectedListener(mOnNavigationOnItemSelectedListener)
 
+        if (savedInstanceState == null ) {
+            loadFragment(SurahFragment())
+        }
     }
 
 
