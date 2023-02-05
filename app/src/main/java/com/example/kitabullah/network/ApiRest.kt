@@ -7,11 +7,12 @@ import com.example.kitabullah.data.TafsirResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiRest {
 
     @GET("surat")
-    fun getSurat() : Call<List<SuratResponseItem>>
+    fun getSurat(@Query("q")surah : String) : Call<List<SuratResponseItem>>
 
     @GET("surat/{nomor}")
     fun getDetailSurat(@Path("nomor")nomor : Int) : Call<DetailSuratResponse>

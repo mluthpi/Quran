@@ -42,7 +42,7 @@ class TafsirFragment : Fragment() {
         tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
         )[TafsirViewModel::class.java]
 
-        tafsirViewModel.getTafsir()
+        tafsirViewModel.getTafsir(surah = String())
 
         tafsirViewModel.listTafsir.observe(requireActivity()) {tafsir ->
             showTafsir(tafsir)

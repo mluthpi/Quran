@@ -3,6 +3,7 @@ package com.example.kitabullah.ui.detail.surah
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,10 @@ class DetailSurahActivity : AppCompatActivity() {
 
         detailSurahViewModel.dataDetail.observe(this, {dataDetail ->
             showLatin(dataDetail)
+        })
+
+        detailSurahViewModel.isLoading.observe(this, {isLoading ->
+            showLoading(isLoading)
         })
 
 
@@ -101,6 +106,10 @@ class DetailSurahActivity : AppCompatActivity() {
                 Toast.makeText(this, "Berhasil ditambah ke favorite", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onSupportNavigateUp(): Boolean {

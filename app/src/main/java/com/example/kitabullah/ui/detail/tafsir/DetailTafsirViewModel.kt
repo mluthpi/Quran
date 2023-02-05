@@ -28,6 +28,9 @@ class DetailTafsirViewModel(application: Application): ViewModel() {
     private val _dataDetail = MutableLiveData<TafsirResponse>()
     val dataDetail : LiveData<TafsirResponse> = _dataDetail
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isLoading
+
     fun getDetailTafsir(nomor : Int) {
         val client = ApiConfig.getApiRest().getTafsir(nomor = nomor)
         client.enqueue(object : Callback<TafsirResponse> {

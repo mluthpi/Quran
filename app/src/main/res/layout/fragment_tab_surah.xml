@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FavoriteFragment.tabLayout.tabSurah.TabSurahFragment">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_surah"
         android:layout_width="0dp"

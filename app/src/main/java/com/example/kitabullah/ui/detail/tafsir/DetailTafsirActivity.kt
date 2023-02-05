@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,9 @@ class DetailTafsirActivity : AppCompatActivity() {
             showLatin(dataDetail)
         })
 
+        detailTafsirViewModel.isLoading.observe(this, {isLoading ->
+            showLoading(isLoading)
+        })
     }
 
     private fun showTafsirDetail(listTafsirItem: List<TafsirItem>) {
@@ -94,6 +98,10 @@ class DetailTafsirActivity : AppCompatActivity() {
                 Toast.makeText(this, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onSupportNavigateUp(): Boolean {

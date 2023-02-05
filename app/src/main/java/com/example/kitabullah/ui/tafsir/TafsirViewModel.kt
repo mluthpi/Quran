@@ -24,9 +24,9 @@ class TafsirViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 
-    fun getTafsir() {
+    fun getTafsir(surah : String) {
         _isLoading.value = true
-        val client = ApiConfig.getApiRest().getSurat()
+        val client = ApiConfig.getApiRest().getSurat(surah)
         client.enqueue(object : Callback<List<SuratResponseItem>>{
             override fun onResponse(
                 call: Call<List<SuratResponseItem>>,

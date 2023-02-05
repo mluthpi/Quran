@@ -3,9 +3,8 @@ package com.example.kitabullah.ui.surah
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +37,7 @@ class SurahFragment : Fragment() {
         _binding = FragmentSurahBinding.inflate(inflater, container, false)
         return binding.root
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,8 +46,19 @@ class SurahFragment : Fragment() {
         surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
         )[SurahViewModel::class.java]
 
-        surahViewModel.getSurah()
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                surahViewModel.getSurah(newText!!)
+                return true
+            }
+
+        })
+
+        surahViewModel.getSurah(surah = String())
 
         surahViewModel.listSurah.observe(requireActivity()) {surah ->
             Log.d("TEST_", "onViewCreated: ${surah}")
@@ -60,7 +71,23 @@ class SurahFragment : Fragment() {
             showLoading(isLoading)
         }
 
+
+
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                surahViewModel.getSurah(newText!!)
+//                return true
+//            }
+//        })
+//    }
 
     private fun showSurah(listSurah: List<SuratResponseItem>) {
         surahAdapter.addItems(listSurah)
