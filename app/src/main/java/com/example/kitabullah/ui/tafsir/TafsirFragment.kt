@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,21 @@ class TafsirFragment : Fragment() {
 
         tafsirViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
         )[TafsirViewModel::class.java]
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    tafsirViewModel.getTafsir(query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                tafsirViewModel.getTafsir(newText!!)
+                return true
+            }
+
+        })
 
         tafsirViewModel.getTafsir(surah = String())
 

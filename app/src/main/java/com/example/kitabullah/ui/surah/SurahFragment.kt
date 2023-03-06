@@ -48,6 +48,9 @@ class SurahFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    surahViewModel.getSurah(query)
+                }
                 return false
             }
 
