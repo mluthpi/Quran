@@ -46,24 +46,34 @@ class SurahFragment : Fragment() {
         surahViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()
         )[SurahViewModel::class.java]
 
+
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    surahViewModel.getSurah(query)
-                }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                surahViewModel.getSurah(newText!!)
+                val surah = newText
+                println("TEST_DATA: $surah")
+//                surahViewModel.filterSurah(surah!!)
+                surahViewModel.getSurah()
+                surahViewModel.listSurah.observe(requireActivity()) { surah ->
+                    val filterSurah = surah.filter { it.namaLatin?.toLowerCase()?.equals(surah) == true }
+                    println("TEST_DATA: onQueryTextChange. listSurah observe: ${filterSurah.size}")
+//                    showSurah(surah)
+
+
+                }
                 return true
             }
 
         })
 
-        surahViewModel.getSurah(surah = String())
+        surahViewModel.getSurah()
 
         surahViewModel.listSurah.observe(requireActivity()) {surah ->
+//            println("TEST_DATA: listSurah observe: $surah")
             Log.d("TEST_", "onViewCreated: ${surah}")
             showSurah(surah)
 
@@ -91,6 +101,8 @@ class SurahFragment : Fragment() {
 //            }
 //        })
 //    }
+
+
 
     private fun showSurah(listSurah: List<SuratResponseItem>) {
         surahAdapter.addItems(listSurah)

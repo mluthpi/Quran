@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface ApiRest {
 
     @GET("surat")
-    fun getSurat(@Query("q")surah : String) : Call<List<SuratResponseItem>>
+    fun getSurat() : Call<List<SuratResponseItem>>
 
     @GET("surat/{nomor}")
     fun getDetailSurat(@Path("nomor")nomor : Int) : Call<DetailSuratResponse>

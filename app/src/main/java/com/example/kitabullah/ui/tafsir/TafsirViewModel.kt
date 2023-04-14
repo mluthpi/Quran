@@ -26,7 +26,7 @@ class TafsirViewModel : ViewModel() {
 
     fun getTafsir(surah : String) {
         _isLoading.value = true
-        val client = ApiConfig.getApiRest().getSurat(surah)
+        val client = ApiConfig.getApiRest().getSurat()
         client.enqueue(object : Callback<List<SuratResponseItem>>{
             override fun onResponse(
                 call: Call<List<SuratResponseItem>>,

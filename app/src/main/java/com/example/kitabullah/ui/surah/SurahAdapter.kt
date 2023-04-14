@@ -16,7 +16,6 @@ class SurahAdapter(val onItemClick: (surahItem: SuratResponseItem)-> Unit): Recy
         notifyDataSetChanged()
     }
 
-
     class SurahHolder(private val binding: ListSurahBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(surah : SuratResponseItem) {
             with(binding) {

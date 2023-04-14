@@ -24,9 +24,9 @@ class SurahViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getSurah(surah : String) {
+    fun getSurah() {
         _isLoading.value = true
-        val client = ApiConfig.getApiRest().getSurat(surah)
+        val client = ApiConfig.getApiRest().getSurat()
         client.enqueue(object : Callback<List<SuratResponseItem>>{
             override fun onResponse(call: Call<List<SuratResponseItem>>, response: Response<List<SuratResponseItem>>) {
                 _isLoading.value = false
@@ -43,5 +43,9 @@ class SurahViewModel : ViewModel() {
         })
     }
 
+    fun filterSurah(surah: String) {
+        println("TEST_DATA: filterSurah called")
+        _listSurah.value?.filter { it.nama == surah }
+    }
 }
 
